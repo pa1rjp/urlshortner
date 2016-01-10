@@ -16,7 +16,7 @@
 		html 					{ overflow-y:scroll; }
 		body 					{ padding-top:50px; }
 		#todo-list 				{ margin-bottom:30px; }
-		#todo-form 	 			{ margin-bottom:50px; }
+		#todo-form 	 			{ margin-bottom:30px; }
 	</style>
 
 	<!-- SPELLS -->
@@ -36,16 +36,29 @@
 			<h1>Homelane short URL's <span class="label label-info">{{ todos.length }}</span></h1>
 		</div>
 
+		<!-- FORM TO CREATE TODOS -->
+		<div id="todo-form" class="row">
+			<div class="col-md-12 text-center">
+				<form>
+					<div class="form-group col-md-10">
+						<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+						<input type="text" class="form-control input-lg text-center" placeholder="Enter a looooooooooooong url" ng-model="formData.text">
+					</div>
+
+					<!-- createToDo() WILL CREATE NEW TODOS -->
+					<button type="submit" class="btn btn-primary btn-lg col-md-2" ng-click="createTodo()">Generate</button>
+				</form>
+			</div>
+		</div>
+
 		<!-- TODO LIST -->
 		<div id="todo-list" class="row">
-			<div class="col-sm-4 col-sm-offset-4">
-
-				
-
+			<div class="col-md-8 col-md-offset-2">
 				<!-- LOOP OVER THE TODOS IN $scope.todos -->
 				<div class="checkbox" ng-repeat="todo in todos">
 					<label>
-						<input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
+						<input type="checkbox" ng-click="deleteTodo(todo._id)">
+						<a href="{{ todo.location.origin }}/su/{{ todo.shorturl }}" target="_blank">{{ todo.location.origin }}/su/{{ todo.shorturl }}</a>
 					</label>
 				</div>
 
@@ -53,22 +66,6 @@
 					<span class="fa fa-spinner fa-spin fa-3x"></span>
 				</p>
 
-			</div>
-		</div>
-
-		<!-- FORM TO CREATE TODOS -->
-		<div id="todo-form" class="row">
-			<div class="col-sm-8 col-sm-offset-2 text-center">
-				<form>
-					<div class="form-group">
-
-						<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-						<input type="text" class="form-control input-lg text-center" placeholder="Enter a looooooooooooong url" ng-model="formData.text">
-					</div>
-
-					<!-- createToDo() WILL CREATE NEW TODOS -->
-					<button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Generate</button>
-				</form>
 			</div>
 		</div>
 
