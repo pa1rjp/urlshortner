@@ -5,6 +5,7 @@ angular.module('todoController', [])
 		$scope.formData = {};
 		$scope.loading = true;
 		$scope.customurl = false;
+		$scope.location = window.location.protocol + "//" + window.location.host + "/"
 
 		// GET =====================================================================
 		// when landing on the page, get all todos and show them

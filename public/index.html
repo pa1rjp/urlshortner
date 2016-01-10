@@ -54,7 +54,12 @@
 						</div>
 					</div>
 					<div class="form-group col-md-10">
-						<input type="text" ng-disabled="!customurl" class="form-control input-lg text-center" placeholder="Enter custom short url" ng-model="formData.customtext">
+						<div class="input-group">
+      						<div class="input-group-addon">
+      							<b ng-bind="location"></b>
+      						</div>
+      						<input type="text" ng-disabled="!customurl" class="form-control input-lg text-center" placeholder="Enter custom short url" ng-model="formData.customtext">
+    					</div>
 					</div>
 
 					<!-- createToDo() WILL CREATE NEW TODOS -->
@@ -62,10 +67,17 @@
 				</form>
 			</div>
 		</div>
-
+		<hr>
 		<!-- TODO LIST -->
 		<div id="todo-list" class="row">
 			<div class="col-md-12">
+				<div class="input-group">
+      				<div class="input-group-addon">
+      					<span class="glyphicon glyphicon-search" aria-hidden="true">
+      				</div>
+      				<input type="text" ng-model="searchurl" placeholder="Search for short url or actual url" class="input-lg form-control">
+    			</div>
+    			<br>
 				<table class="table table-hover table-condensed" ng-show="todos.length > 0">
 					<thead> 
 						<tr> 
@@ -77,7 +89,7 @@
 						</tr> 
 					</thead>
 					<tbody> 
-						<tr ng-repeat="todo in todos | orderBy:clicks:true">
+						<tr ng-repeat="todo in todos | filter:searchurl | orderBy:clicks:true">
 							<th scope="row">{{$index + 1}}</th> 
 							<td><a href="{{ todo.location.origin }}/su/{{ todo.shorturl }}" target="_blank">{{ todo.location.origin }}/su/{{ todo.shorturl }}</a></td> 
 							<td><p class="">{{todo.clicks}}</p></td> 
