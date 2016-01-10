@@ -4,6 +4,7 @@ angular.module('todoController', [])
 	.controller('mainController', ['$scope','$http','Todos', function($scope, $http, Todos) {
 		$scope.formData = {};
 		$scope.loading = true;
+		$scope.customurl = false;
 
 		// GET =====================================================================
 		// when landing on the page, get all todos and show them
@@ -46,5 +47,14 @@ angular.module('todoController', [])
 					$scope.loading = false;
 					$scope.todos = data; // assign our new list of todos
 				});
+		};
+
+		$scope.addCustomUrl = function(checked) {
+			if (checked) {
+				$scope.customurl = true;
+			} else{
+				$scope.customurl = false;
+			};
+			
 		};
 	}]);

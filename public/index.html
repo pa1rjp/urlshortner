@@ -13,10 +13,11 @@
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 	<style>
-		html 					{ overflow-y:scroll; }
-		body 					{ padding-top:50px; }
-		#todo-list 				{ margin-bottom:30px; }
-		#todo-form 	 			{ margin-bottom:30px; }
+		html { overflow-y:scroll; }
+		body { padding-top:50px; }
+		#todo-list { margin-bottom:30px; }
+		#todo-form { margin-bottom:30px; }
+		.action { cursor: pointer;}
 	</style>
 
 	<!-- SPELLS -->
@@ -40,27 +41,51 @@
 		<div id="todo-form" class="row">
 			<div class="col-md-12 text-center">
 				<form>
-					<div class="form-group col-md-10">
+					<div class="form-group">
 						<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
 						<input type="text" class="form-control input-lg text-center" placeholder="Enter a looooooooooooong url" ng-model="formData.text">
 					</div>
+					<div class="form-group col-md-2">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" ng-model="customurl" ng-click="addCustomUrl(customurl)"> 
+								<p class="bg-info">Add custom short url</p>
+							</label>
+						</div>
+					</div>
+					<div class="form-group col-md-10">
+						<input type="text" ng-disabled="!customurl" class="form-control input-lg text-center" placeholder="Enter custom short url" ng-model="formData.customtext">
+					</div>
 
 					<!-- createToDo() WILL CREATE NEW TODOS -->
-					<button type="submit" class="btn btn-primary btn-lg col-md-2" ng-click="createTodo()">Generate</button>
+					<button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Generate</button>
 				</form>
 			</div>
 		</div>
 
 		<!-- TODO LIST -->
 		<div id="todo-list" class="row">
-			<div class="col-md-8 col-md-offset-2">
-				<!-- LOOP OVER THE TODOS IN $scope.todos -->
-				<div class="checkbox" ng-repeat="todo in todos">
-					<label>
-						<input type="checkbox" ng-click="deleteTodo(todo._id)">
-						<a href="{{ todo.location.origin }}/su/{{ todo.shorturl }}" target="_blank">{{ todo.location.origin }}/su/{{ todo.shorturl }}</a>
-					</label>
-				</div>
+			<div class="col-md-12">
+				<table class="table table-hover table-condensed" ng-show="todos.length > 0">
+					<thead> 
+						<tr> 
+							<th>#</th> 
+							<th>Short Url</th> 
+							<th>Clicks</th> 
+							<th>Actual Url</th> 
+							<th>Actions</th>
+						</tr> 
+					</thead>
+					<tbody> 
+						<tr ng-repeat="todo in todos | orderBy:clicks:true">
+							<th scope="row">{{$index + 1}}</th> 
+							<td><a href="{{ todo.location.origin }}/su/{{ todo.shorturl }}" target="_blank">{{ todo.location.origin }}/su/{{ todo.shorturl }}</a></td> 
+							<td><p class="">{{todo.clicks}}</p></td> 
+							<td><a href="{{ todo.longurl }}" target="_blank">{{ todo.longurl }}</a></td> 
+							<td><span class="action glyphicon glyphicon-trash text-danger" aria-hidden="true" ng-click="deleteTodo(todo._id)"></span></td>
+						</tr>
+					</tbody>
+				</table>
 
 				<p class="text-center" ng-show="loading">
 					<span class="fa fa-spinner fa-spin fa-3x"></span>
