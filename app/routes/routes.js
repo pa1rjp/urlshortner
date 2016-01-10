@@ -106,7 +106,7 @@ module.exports = function(app) {
 
 	// short url redirection
 	app.get('/su/:shorturl', function(req, res) {
-		UrlRepo.findOne({shorturl: "diREM"}, function(err, url) {
+		UrlRepo.findOne({shorturl: req.params.shorturl}, function(err, url) {
 			res.redirect(url.longurl);
 		});
 	});
