@@ -93,7 +93,7 @@
 							<th scope="row">{{$index + 1}}</th> 
 							<td><a href="{{ todo.location.origin }}/su/{{ todo.shorturl }}" target="_blank">{{ todo.location.origin }}/su/{{ todo.shorturl }}</a></td> 
 							<td><p class="">{{todo.clicks}}</p></td> 
-							<td><a href="{{ todo.longurl }}" target="_blank">{{ todo.longurl }}</a></td> 
+							<td><a href="{{ todo.longurl }}" target="_blank">{{ todo.longurl | cut:true:60:' ...' }}</a></td> 
 							<td><span class="action glyphicon glyphicon-trash text-danger" aria-hidden="true" ng-click="deleteTodo(todo._id)"></span></td>
 						</tr>
 					</tbody>
