@@ -1,1 +1,1 @@
-angular.module('nodeShortUrl', ['shorturlController', 'shorturlService']);
+angular.module('scotchTodo', ['todoController', 'todoService']);
