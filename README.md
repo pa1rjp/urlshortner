@@ -8,7 +8,7 @@ Node provides the RESTful API. Angular provides the frontend and accesses the AP
 
 - [Node and npm](http://nodejs.org)
 
-## Google auth setings  
+## Google auth settings  
 
 This app is integrated to Google Oauth, out of the box. Add below information to connect to your Google app,  
 `ClientID:`  this the clientid from your google app  
