@@ -12,6 +12,9 @@ angular.module('todoService', [])
 			},
 			delete : function(id) {
 				return $http.delete('/api/url/' + id);
+			},
+			isLoggedIn : function(user) {
+				return $http.get('/api/isLoggedIn', user);
 			}
 		}
 	}]);

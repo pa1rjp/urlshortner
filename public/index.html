@@ -34,11 +34,13 @@
 
 		<!-- HEADER AND TODO COUNT -->
 		<div class="jumbotron text-center">
-			<h1>Homelane short URL's <span class="label label-info">{{ todos.length }}</span></h1>
+			<h1>Homelane short URL's <span class="label label-info" ng-if="user">{{ todos.length }}</span></h1>
+			<a href="/auth/google" ng-if="!user" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</a>
+			<span ng-if="user" class="label label-danger">Hi, {{user.name}}</span><a href="/logout" ng-if="user" title="logout" style="position: relative;top: 5px;left: 5px;"><span class="glyphicon glyphicon-log-out"></span></a>
 		</div>
 
 		<!-- FORM TO CREATE TODOS -->
-		<div id="todo-form" class="row">
+		<div id="todo-form" class="row" ng-if="user">
 			<div class="col-md-12 text-center">
 				<form>
 					<div class="form-group">
@@ -61,7 +63,7 @@
       						<input type="text" ng-disabled="!customurl" class="form-control input-lg text-center" placeholder="Enter custom short url" ng-model="formData.customtext">
     					</div>
 					</div>
-
+					<input type="hidden" ng-model="email" value="{{user.email}}">
 					<!-- createToDo() WILL CREATE NEW TODOS -->
 					<button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Generate</button>
 				</form>
@@ -69,7 +71,7 @@
 		</div>
 		<hr>
 		<!-- TODO LIST -->
-		<div id="todo-list" class="row">
+		<div id="todo-list" class="row" ng-if="user">
 			<div class="col-md-12">
 				<div class="input-group"  ng-show="todos.length > 0">
       				<div class="input-group-addon">
